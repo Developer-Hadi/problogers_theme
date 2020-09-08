@@ -2,14 +2,14 @@
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main" role="main">
-
+            <h1><?php wp_title(''); ?></h1>
             <?php if(have_posts(  )) : while(have_posts(  )) : the_post(  ); ?>
                 <?php get_template_part('template-parts/content', 'blog')?>
             <?php endwhile; else : ?>
                 <?php get_template_part( 'template-parts/content', 'none') ?>
             <?php endif; ?>
-            
-            <p>We are on index.php</p>
+            <?php echo paginate_links( );?>
+            <p>We are on home.php</p>
             
         </main>
     </div>

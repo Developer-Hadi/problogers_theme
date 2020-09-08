@@ -67,5 +67,41 @@ function problogers_scripts(){
 }
 add_action('wp_enqueue_scripts', 'problogers_scripts');
 
+//Register Navigation Menu
+register_nav_menus( array(
+    'main-menu' => __('Main Menu', 'problogers'),
+    'footer-menu' => __('Footer Menu', 'problogers'),
+) );
+
+
+// Register widgets
+
+function problogers_widgets_init(){
+    register_sidebar( [
+        'name'          => __('Main Sidebar', 'problogers'),
+        'id'            => 'main-sidebar',
+        'description'   => __('Add your widgets'),
+        'before_widget' => '<section class="widget">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>'
+    ] );
+}
+
+add_action( 'widgets_init', 'problogers_widgets_init');
+
+// controlling excerpt length
+function problogers_excerpt_more( $more ) {
+    if ( ! is_single() ) {
+        $more = sprintf( '<a class="read-more" href="%1$s">%2$s</a>',
+            get_permalink( get_the_ID() ),
+            __( ' Read More', 'textdomain' )
+        );
+    }
+ 
+    return $more;
+}
+add_filter( 'excerpt_more', 'problogers_excerpt_more' );
+
 
 ?>
